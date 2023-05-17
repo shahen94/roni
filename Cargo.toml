@@ -1,0 +1,14 @@
+[package]
+name = "roni"
+version = "0.1.0"
+edition = "2021"
+description = "A command-line tool for managing your projects."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.71"
+clap = { version = "4.1.6", features = ["derive"] }
+serde = { version = "1.0.152", features = ["derive"] }
+serde_json = "1.0.93"
+thiserror = "1.0.40"
