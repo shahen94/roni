@@ -42,6 +42,10 @@ pub fn main() -> Result<()> {
             config.remove_project(project_name.to_string())?;
             log.log(format!("Removed project: {}", project_name));
         }
+
+        Operation::Help => {
+            Operation::help();
+        }
     }
 
     print!("Config directory: {}", config.get_path().display());
