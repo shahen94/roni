@@ -2,11 +2,20 @@ use crate::errors::RoniError;
 
 #[derive(Debug)]
 pub enum Operation {
+  // Print project or projects list
   Print(Option<String>),
+
+  // Add project
   Add(String),
+
+  // Remove project
   Remove(String),
-  Link(String),
-  Unlink(String),
+
+  // Link file to project
+  Link(String, String),
+
+  // Unlink file from project
+  Unlink(String, String),
 }
 
 impl TryFrom<Vec<String>> for Operation {
@@ -15,10 +24,6 @@ impl TryFrom<Vec<String>> for Operation {
     fn try_from(value: Vec<String>) -> Result<Self, Self::Error> {
       if value.len() == 0 {
         return Err(RoniError::InvalidOperation);
-      }
-
-      if value.len() > 2 {
-        return Err(RoniError::TooManyArguments);
       }
       
       if value.len() == 1 {
@@ -43,12 +48,20 @@ impl TryFrom<Vec<String>> for Operation {
         return Ok(Operation::Remove(val));
       }
 
+      if op == "link" && value.len() < 3 {
+        return Err(RoniError::InvalidOperation.into());
+      }
+
+      if op == "unlink" && value.len() < 3 {
+        return Err(RoniError::InvalidOperation.into());
+      }
+
       if op == "link" {
-        return Ok(Operation::Link(val));
+        return Ok(Operation::Link(val, value[2].to_string()));
       }
 
       if op == "unlink" {
-        return Ok(Operation::Unlink(val));
+        return Ok(Operation::Unlink(val, value[2].to_string()));
       }
 
       Err(RoniError::InvalidOperation.into())

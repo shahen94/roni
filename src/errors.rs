@@ -6,6 +6,14 @@ pub enum RoniError {
   InvalidOperation,
 
   #[error("Too many arguments")]
-  TooManyArguments
+  TooManyArguments,
+
+  #[error("Config file not found")]
+  ConfigFileNotFound,
+
+  #[error("Corrupted config file")]
+  CorruptedConfigFile,
 }
 
+
+pub type Result<T> = std::result::Result<T, RoniError>;
