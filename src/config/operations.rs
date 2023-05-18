@@ -38,7 +38,7 @@ impl TryFrom<Vec<String>> for Operation {
 
     fn try_from(value: Vec<String>) -> Result<Self, Self::Error> {
         if value.len() == 0 {
-            return Err(RoniError::InvalidOperation);
+            return Ok(Operation::Help);
         }
 
         if value.len() == 1 {

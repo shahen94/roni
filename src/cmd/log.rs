@@ -6,7 +6,11 @@ impl Log {
         Self {}
     }
 
-    pub fn log(&self, message: String) {
+    pub fn log(message: String) {
         println!("{}", message.bold().green());
+    }
+
+    pub fn warn(message: String) {
+        println!("{}", message.bold().yellow());
     }
 }
